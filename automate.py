@@ -16,6 +16,7 @@ class Invoice:
     due_date: str
     items: List[dict]
     notes: str
+    currency: str
 
 
 class CSVParser:
@@ -28,7 +29,8 @@ class CSVParser:
             'date',
             'due_date',
             'items',
-            'notes'
+            'notes',
+            'currency'
         )
         self.csv_name = csv_name
 
@@ -62,7 +64,8 @@ class ApiConnector:
             'date': invoice.date,
             'due_date': invoice.due_date,
             'items': invoice.items,
-            'notes': invoice.notes
+            'notes': invoice.notes,
+            'currency': invoice.currency
         }
         r = requests.post(self.url, json=invoice_parsed, headers=self.headers)
         if r.status_code == 200 or r.status_code == 201:
